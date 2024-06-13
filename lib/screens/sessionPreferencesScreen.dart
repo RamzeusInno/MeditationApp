@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:contrast_shower_appplication/sessionDurationForm.dart';
+import 'package:contrast_shower_appplication/widgets/sessionDurationForm.dart';
 
 
 class SessionPreferencesScreen extends ConsumerStatefulWidget {

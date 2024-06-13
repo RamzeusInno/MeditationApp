@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SessionDurationForm extends StatefulWidget {
+class SessionDurationForm extends ConsumerStatefulWidget {
   @override
-  _SessionDurationFormState createState() => _SessionDurationFormState();
+  ConsumerState<SessionDurationForm> createState() => _SessionDurationFormState();
 }
 
-class _SessionDurationFormState extends State<SessionDurationForm> {
+class _SessionDurationFormState extends ConsumerState<SessionDurationForm> {
   final _formKey = GlobalKey<FormState>();
   int _minutes = 0;
   int _seconds = 10;
