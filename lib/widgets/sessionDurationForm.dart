@@ -1,5 +1,7 @@
+import 'package:contrast_shower_appplication/session.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:contrast_shower_appplication/providers/sessionProvider.dart';
 
 class SessionDurationForm extends ConsumerStatefulWidget {
   @override
@@ -83,7 +85,13 @@ class _SessionDurationFormState extends ConsumerState<SessionDurationForm> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState?.validate() == true) {
-                          print('Session duration: ${_minutes}m ${_seconds}s');
+                          Session session = Session(
+                            _minutes,
+                            _seconds,
+                            _repetitions,
+                          );
+
+                          ref.read(upcomingSessionNotifierProvider.notifier).addSession(session);
                         }
                       },
                       child: Text('Submit'),
