@@ -4,6 +4,7 @@ import 'package:contrast_shower_appplication/screens/sessionScreen.dart';
 import 'package:contrast_shower_appplication/screens/postSessionScreen.dart';
 import 'package:contrast_shower_appplication/screens/sessionPreferencesScreen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:contrast_shower_appplication/screens/sessionOverviewScreen.dart';
 
 void main() {
   runApp(ProviderScope(
@@ -12,7 +13,7 @@ void main() {
       routes: {
         '/': (context) => const Homescreen(),
         '/session_preferences': (context) => const SessionPreferencesScreen(),
-        
+        '/session_overview': (context) => const SessionOverviewScreen(),
       },  
     ),
   ));

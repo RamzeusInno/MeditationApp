@@ -1,7 +1,7 @@
 import 'package:contrast_shower_appplication/session.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:contrast_shower_appplication/providers/sessionProvider.dart';
+import 'package:contrast_shower_appplication/providers/selectedSessionProvider.dart';
 
 class SessionDurationForm extends ConsumerStatefulWidget {
   @override
@@ -11,7 +11,7 @@ class SessionDurationForm extends ConsumerStatefulWidget {
 class _SessionDurationFormState extends ConsumerState<SessionDurationForm> {
   final _formKey = GlobalKey<FormState>();
   int _minutes = 0;
-  int _seconds = 10;
+  int _seconds = 1;
   int _repetitions = 3;
 
   @override
@@ -52,7 +52,7 @@ class _SessionDurationFormState extends ConsumerState<SessionDurationForm> {
         labelText: 'Number of repetitions',
       ),
       keyboardType: TextInputType.number,
-      onFieldSubmitted: (value) {
+      onChanged: (value) {
         setState(() {
           _repetitions = int.parse(value);
         });
@@ -72,7 +72,8 @@ class _SessionDurationFormState extends ConsumerState<SessionDurationForm> {
               _repetitions,
             );
 
-            ref.read(upcomingSessionNotifierProvider.notifier).addSession(session);
+            ref.read(selectedSessionNotifierProvider.notifier).setSession(session);
+            Navigator.pushNamed(context, '/session_overview');
           }
         },
         child: Text('Submit'),
@@ -106,7 +107,7 @@ class _SessionDurationFormState extends ConsumerState<SessionDurationForm> {
         labelText: 'Seconds',
       ),
       keyboardType: TextInputType.number,
-      onFieldSubmitted: (value) {
+      onChanged: (value) {
         setState(() {
           _seconds = int.parse(value);
         });
@@ -121,7 +122,7 @@ class _SessionDurationFormState extends ConsumerState<SessionDurationForm> {
         labelText: 'Minutes',
       ),
       keyboardType: TextInputType.number,
-      onFieldSubmitted: (value) {
+      onChanged: (value) {
         setState(() {
           _minutes = int.parse(value);
         });

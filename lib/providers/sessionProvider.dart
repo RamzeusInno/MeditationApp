@@ -18,11 +18,6 @@ class SessionNotifier extends Notifier<List<Session>> {
   }
 }
 
-
-final upcomingSessionNotifierProvider = NotifierProvider<SessionNotifier, List<Session>>(() {
-  return SessionNotifier();
-});
-
 final finishedSessionNotifierProvider = NotifierProvider<SessionNotifier, List<Session>>(() {
   return SessionNotifier();
 });
