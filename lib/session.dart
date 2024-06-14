@@ -5,12 +5,22 @@ class Session {
 
   Session(this._minutes, this._seconds, this._repetitions);
 
-  String getDuration() {
-    final Duration duration = Duration(minutes: _minutes * _repetitions, seconds: _seconds * _repetitions);
-    return "${duration.inMinutes}:${duration.inSeconds % 60}";
+  Duration getPeriodDuration() {
+    return Duration(minutes: _minutes, seconds: _seconds);
+  }
+
+  Duration getSessionDuration() {
+    return getPeriodDuration() * _repetitions;
+  }
+
+  String formattedDuration(Duration duration) {
+    return "${duration.inMinutes.toString().padLeft(2, '0')}:${duration.inSeconds.remainder(60).toString().padLeft(2, '0')}";
   }
 
   String info() {
-    return "Minutes: $_minutes\nSeconds: $_seconds\nRepetitions: $_repetitions\nOverall duration: ${getDuration()}";
+    String periodDuration = formattedDuration(getPeriodDuration());
+    String sessioonDuration = formattedDuration(getSessionDuration());
+
+    return "Period duration: $periodDuration\nRepetitions: $_repetitions\nOverall session duration: $sessioonDuration";
   }
 }
