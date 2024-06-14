@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
-class PederencesDisplayWidget extends ConsumerStatefulWidget {
-  const PederencesDisplayWidget({super.key});
+class PreferencesDisplayWidget extends ConsumerStatefulWidget {
+  const PreferencesDisplayWidget({super.key});
 
   @override
-  ConsumerState<PederencesDisplayWidget> createState() => _MyWidgetState();
+  ConsumerState<PreferencesDisplayWidget> createState() => _PreferencesDisplayWidgetState();
 }
 
-class _MyWidgetState extends ConsumerState<PederencesDisplayWidget> {
+class _PreferencesDisplayWidgetState extends ConsumerState<PreferencesDisplayWidget> {
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
