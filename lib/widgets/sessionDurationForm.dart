@@ -11,7 +11,7 @@ class SessionDurationForm extends ConsumerStatefulWidget {
 class _SessionDurationFormState extends ConsumerState<SessionDurationForm> {
   final _formKey = GlobalKey<FormState>();
   int _minutes = 0;
-  int _seconds = 1;
+  int _seconds = 10;
   int _repetitions = 3;
 
   @override

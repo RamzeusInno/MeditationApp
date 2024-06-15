@@ -14,9 +14,17 @@ class SessionOverviewScreen extends ConsumerWidget {
         title: const Text("Session overview"),
         backgroundColor: Colors.blue[900],
       ),
-      body: Text(
-        selectedSession.info(),
-      ),
+      body: Column(
+        children: [
+          Text(selectedSession.info()),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/session');
+              },
+              child: const Text("Start session")
+          ),
+        ]
+        )
     );
   }
 }

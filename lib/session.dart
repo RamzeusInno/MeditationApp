@@ -10,7 +10,7 @@ class Session {
   }
 
   Duration getSessionDuration() {
-    return getPeriodDuration() * _repetitions;
+    return getPeriodDuration() * _repetitions * 2; // multiply by 2 because of the two periods: hot and cold  
   }
 
   String formattedDuration(Duration duration) {
