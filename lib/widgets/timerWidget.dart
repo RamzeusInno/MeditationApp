@@ -26,8 +26,7 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
     timer = Timer.periodic(const Duration(seconds: 1), (_){
       setState(() {
         if (sessionDuration.inSeconds <= 0) {
-          colorNotifier.setColor(Colors.white);
-          timer?.cancel();
+          endSession();
           return;
         }
 
@@ -93,9 +92,7 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
             const SizedBox(width: 15),
             ElevatedButton(
               onPressed: () {
-                setState(() => timer?.cancel());
-                addFinishedSession();
-                Navigator.pushNamed(context, '/post_session');
+                endSession();
               },
              child: const Text('End session'),
             )
@@ -108,6 +105,12 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
        child: const Text('Start timer'),
       );
   }
+
+void endSession() {
+  setState(() => timer?.cancel());
+  addFinishedSession();
+  Navigator.pushNamed(context, '/post_session');
+}
 
 void addFinishedSession() {
   final finishedSessions = ref.watch(finishedSessionNotifierProvider.notifier);

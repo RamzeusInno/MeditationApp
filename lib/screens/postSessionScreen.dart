@@ -18,8 +18,20 @@ class _PostSessionScreenState extends ConsumerState<PostSessionScreen> {
         title: const Text("Session Summary"),
         backgroundColor: Colors.blue[900],
       ),
-      body: const Center(
-        child: SessionSummaryWidget(),
+      body: Center(
+        child: Center(
+          child: Column(
+            children: [
+               const SessionSummaryWidget(),
+               ElevatedButton(
+                 onPressed: () {
+                   Navigator.popUntil(context, ModalRoute.withName('/'));
+                 },
+                 child: const Text('Main screen'),
+               )
+            ],
+          )
+        )
       ),
     );
   }
