@@ -93,8 +93,9 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
             const SizedBox(width: 15),
             ElevatedButton(
               onPressed: () {
+                setState(() => timer?.cancel());
                 addFinishedSession();
-                Navigator.pushNamed(context, '/post');
+                Navigator.pushNamed(context, '/post_session');
               },
              child: const Text('End session'),
             )
@@ -112,7 +113,7 @@ void addFinishedSession() {
   final finishedSessions = ref.watch(finishedSessionNotifierProvider.notifier);
   final Session session = ref.watch(selectedSessionNotifierProvider);
 
-  Session finishedSession = Session.sessionAndPeriodDurationInit(session.getSessionDuration(), session.getPeriodDuration());
+  Session finishedSession = Session.sessionAndPeriodDurationInit(session.getSessionDuration() - sessionDuration, session.getPeriodDuration());
   finishedSessions.addSession(finishedSession);
 }
   Widget timeDisplay() {

@@ -32,7 +32,7 @@ class _SessionDurationFormState extends ConsumerState<SessionDurationForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text("Time of a period"),
+              const Text("Time of a phase"),
               periodDuration(),
               Flexible(
                 flex: 1,
@@ -67,8 +67,7 @@ class _SessionDurationFormState extends ConsumerState<SessionDurationForm> {
         onPressed: () {
           if (_formKey.currentState?.validate() == true) {
             Session session = Session(
-              _minutes,
-              _seconds,
+              Duration(minutes: _minutes, seconds: _seconds) * 2, // 2 phases in a period
               _repetitions,
             );
 
@@ -76,7 +75,7 @@ class _SessionDurationFormState extends ConsumerState<SessionDurationForm> {
             Navigator.pushNamed(context, '/session_overview');
           }
         },
-        child: Text('Submit'),
+        child: const Text('Submit'),
       ),
     );
   }

@@ -26,7 +26,7 @@ class Session {
   }
 
   Duration getSessionDuration() {
-    return getPeriodDuration() * _repetitions;  
+    return _sessionDuration;  
   }
 
   static String formattedDuration(Duration duration) {

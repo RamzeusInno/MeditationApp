@@ -7,12 +7,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:contrast_shower_appplication/screens/sessionOverviewScreen.dart';
 import 'package:contrast_shower_appplication/screens/sessionScreen.dart';
 
+
 void main() {
   runApp(ProviderScope(
     child: MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => const Homescreen(),
+        '/': (context) => const HomeScreen(),
         '/session_preferences': (context) => const SessionPreferencesScreen(),
         '/session_overview': (context) => const SessionOverviewScreen(),
         '/session': (context) => const SessionScreen(),
