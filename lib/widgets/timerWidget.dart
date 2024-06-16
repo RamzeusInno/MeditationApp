@@ -33,8 +33,6 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
         int dif = session.getSessionDuration().inSeconds - sessionDuration.inSeconds;
         int periodDuration = session.getPeriodDuration().inSeconds;
         if (dif % periodDuration == 0) {
-          print("$dif - $periodDuration - ${dif % (periodDuration * 2)}");
-
           if (dif % (2 * periodDuration) == 0) {
             colorNotifier.setColor(Colors.blue);
           } else {
@@ -58,13 +56,16 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
       sessionDurationInitialized = true;
     }
 
-    
-
-    return Column(
-      children: [
-        timeDisplay(),
-        startTimerButton(),
-      ],
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          children: [
+            timeDisplay(),
+            startTimerButton(),
+          ],
+        ),
+      ),
     );
   }
  
@@ -73,20 +74,32 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
     final bool timerIsCompleted = sessionDuration.inSeconds <= 0;
 
     return timerIsRunning || !timerIsCompleted && timer != null ?
-     Row(
-      children: [
-        ElevatedButton(
-          onPressed: () {
-            if (timerIsRunning) { 
-              setState(() => timer?.cancel());
-            } else {
-              startTimer();
-            }
-          },
-           child: timerIsRunning ? const Text('Pause') : const Text('Resume'),
-          ),
-      ],
-     ):
+      Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              if (timerIsRunning) { 
+                setState(() => timer?.cancel());
+              } else {
+                startTimer();
+              }
+            },
+              child: timerIsRunning ? const Text('Pause') : const Text('Resume'),
+            ),
+            const SizedBox(width: 15),
+            ElevatedButton(
+              onPressed: () {
+        
+              },
+             child: const Text('End session'),
+            )
+        ],
+        ),
+      ) 
+      :
      ElevatedButton(
       onPressed: () => startTimer(),
        child: const Text('Start timer'),
@@ -94,11 +107,32 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
   }
 
   Widget timeDisplay() {
-    return Text(
-      '${sessionDuration.inMinutes.toString().padLeft(2, '0')}:${(sessionDuration.inSeconds % 60).toString().padLeft(2, '0')}',
-      style: const TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 70.0,
+    final Session session = ref.watch(selectedSessionNotifierProvider);
+
+    return SizedBox(
+      width: 200,
+      height: 200,
+
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          CircularProgressIndicator(
+            value: 1 - sessionDuration.inSeconds / session.getSessionDuration().inSeconds,
+            valueColor: AlwaysStoppedAnimation(Colors.green[400]),
+            backgroundColor: Colors.white,
+          ),
+      
+          Center(
+            child: Text(
+            '${sessionDuration.inMinutes.toString().padLeft(2, '0')}:${(sessionDuration.inSeconds % 60).toString().padLeft(2, '0')}',
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 70.0,
+              ),
+            ),
+          )
+          
+        ],
       ),
     );
   }
