@@ -1,10 +1,12 @@
 class Session {
+  final Duration _sessionDuration;
   final Duration _periodDuration;
   final int _repetitions;
 
-  Session(this._periodDuration, this._repetitions);
+  Session(this._periodDuration, this._repetitions): _sessionDuration = _periodDuration * _repetitions;
 
   Session.sessionAndPeriodDurationInit(Duration sessionDuration, this._periodDuration) :
+    _sessionDuration = sessionDuration,
     _repetitions = sessionDuration.inSeconds ~/ _periodDuration.inSeconds;
 
   int numberOfPeriods() {
