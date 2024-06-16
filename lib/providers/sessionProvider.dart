@@ -15,6 +15,10 @@ class SessionNotifier extends Notifier<List<Session>> {
   void removeSession(Session session) {
     state = state.where((element) => element != session).toList();
   }
+
+  Session lastSession() {
+    return state.last;
+  }
 }
 
 final finishedSessionNotifierProvider = NotifierProvider<SessionNotifier, List<Session>>(() {

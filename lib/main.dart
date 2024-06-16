@@ -16,6 +16,7 @@ void main() {
         '/session_preferences': (context) => const SessionPreferencesScreen(),
         '/session_overview': (context) => const SessionOverviewScreen(),
         '/session': (context) => const SessionScreen(),
+        '/post_session': (context) => const PostSessionScreen(),
       },  
     ),
   ));

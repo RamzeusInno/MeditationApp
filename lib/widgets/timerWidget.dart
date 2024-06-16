@@ -1,5 +1,6 @@
 import 'package:contrast_shower_appplication/providers/colorProvider.dart';
 import 'package:contrast_shower_appplication/providers/selectedSessionProvider.dart';
+import 'package:contrast_shower_appplication/providers/sessionProvider.dart';
 import 'package:contrast_shower_appplication/session.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,7 +32,7 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
         }
 
         int dif = session.getSessionDuration().inSeconds - sessionDuration.inSeconds;
-        int periodDuration = session.getPeriodDuration().inSeconds;
+        int periodDuration = session.getPhaseDuration().inSeconds;
         if (dif % periodDuration == 0) {
           if (dif % (2 * periodDuration) == 0) {
             colorNotifier.setColor(Colors.blue);
@@ -92,7 +93,8 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
             const SizedBox(width: 15),
             ElevatedButton(
               onPressed: () {
-        
+                addFinishedSession();
+                Navigator.pushNamed(context, '/post');
               },
              child: const Text('End session'),
             )
@@ -106,6 +108,13 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
       );
   }
 
+void addFinishedSession() {
+  final finishedSessions = ref.watch(finishedSessionNotifierProvider.notifier);
+  final Session session = ref.watch(selectedSessionNotifierProvider);
+
+  Session finishedSession = Session.sessionAndPeriodDurationInit(session.getSessionDuration(), session.getPeriodDuration());
+  finishedSessions.addSession(finishedSession);
+}
   Widget timeDisplay() {
     final Session session = ref.watch(selectedSessionNotifierProvider);
 
