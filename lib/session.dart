@@ -1,32 +1,33 @@
 class Session {
-  final int _minutes;
-  final int _seconds;
+  final Duration _periodDuration;
   final int _repetitions;
 
-  Session(this._minutes, this._seconds, this._repetitions);
+  Session(this._periodDuration, this._repetitions);
 
-  Session.sessionAndPeriodDurationInit(Duration sessionDuration, Duration periodDuration) :
-    _minutes = sessionDuration.inMinutes,
-    _seconds = sessionDuration.inSeconds.remainder(60),
-    _repetitions = sessionDuration.inSeconds ~/ periodDuration.inSeconds;
+  Session.sessionAndPeriodDurationInit(Duration sessionDuration, this._periodDuration) :
+    _repetitions = sessionDuration.inSeconds ~/ _periodDuration.inSeconds;
 
-  Session.phaseDurationInit(Duration phaseDuration, this._repetitions) :
-    _minutes = phaseDuration.inMinutes,
-    _seconds = phaseDuration.inSeconds.remainder(60);
+  int numberOfPeriods() {
+    return _repetitions;
+  }
+
+  int numberOfPhases() {
+    return _repetitions * 2;
+  }
 
   Duration getPhaseDuration() {
-    return Duration(minutes: _minutes, seconds: _seconds);
+    return _periodDuration * 0.5; // multiply by 0.5 because of the two periods: hot and cold
   }
 
   Duration getPeriodDuration() {
-    return getPhaseDuration() * 2;// multiply by 2 because of the two periods: hot and cold 
+    return _periodDuration;
   }
 
   Duration getSessionDuration() {
     return getPeriodDuration() * _repetitions;  
   }
 
-  String formattedDuration(Duration duration) {
+  static String formattedDuration(Duration duration) {
     return "${duration.inMinutes.toString().padLeft(2, '0')}:${duration.inSeconds.remainder(60).toString().padLeft(2, '0')}";
   }
 
