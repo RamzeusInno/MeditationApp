@@ -16,25 +16,49 @@ class SessionListWidget extends ConsumerStatefulWidget {
 class _SessionListWidgetState extends ConsumerState<SessionListWidget> {
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: Hive.box<String>('sessionBox').listenable(),
-      builder: (context, Box<String> box, widget) {
-        List<String> sessions = box.values.toList();
+        return Container(
+      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.all(16),
+      
+      child: ValueListenableBuilder(
+        valueListenable: Hive.box<String>('sessionBox').listenable(),
+        builder: (context, Box<String> box, widget) {
+          List<String> sessions = box.values.toList();
 
-        return Expanded (
-          child: SizedBox(
-            height: 200.0,
-            child: ListView.builder(
-              itemCount: sessions.length,
-              itemBuilder: (context, index) {
-                return ListTile(  
-                title: Text(sessions[index]),
-              );
-              },
-            ),
-          ),
-        );
-      },
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              if (sessions.isNotEmpty) 
+                const Text(
+                'Custom Session List',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              
+              const SizedBox(height: 10),
+
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: sessions.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: const EdgeInsets.fromLTRB(300, 0, 300, 0),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.grey[300]
+                    ),
+                      child: Center(child: Text(
+                        'Session number ${index + 1}\n${sessions[index]}',
+                      ),
+                    )
+                  );
+                },
+              ),
+
+            ],
+          );
+        },
+      ),
     );
   }
 }

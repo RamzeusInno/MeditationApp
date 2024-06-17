@@ -25,10 +25,10 @@ class _PostSessionScreenState extends ConsumerState<PostSessionScreen> {
                const SessionSummaryWidget(),
                ElevatedButton(
                  onPressed: () {
-                   Navigator.popUntil(context, ModalRoute.withName('/'));
-                 },
-                 child: const Text('Main screen'),
-               )
+                  Navigator.popUntil(context, ModalRoute.withName('/'));
+                },              
+                child: const Text('Main screen'),
+               ),
             ],
           )
         )

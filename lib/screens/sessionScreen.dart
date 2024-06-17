@@ -24,6 +24,7 @@ class _SessionscreenState extends ConsumerState<SessionScreen> {
         
         return Scaffold(
           appBar: AppBar(
+            //bottom: 
             title: const Text("Contrast shower session"),
             backgroundColor: Colors.blue[900],
           ),

@@ -128,12 +128,13 @@ void addFinishedSession() {
 
   Session finishedSession = Session.sessionAndPeriodDurationInit(session.getSessionDuration() - sessionDuration, session.getPeriodDuration());
   finishedSessions.addSession(finishedSession);
+  
   box.add(
-      'Time: ${DateFormat('dd/MM/yyyy HH:mm').format(DateTime.now())}'
+      'Time: ${DateFormat('dd/MM/yyyy HH:mm').format(DateTime.now())}\n'
       'Session time: ${Session.formattedDuration(finishedSession.getSessionDuration())}\n'
       'Task completion rate: ${(
         (finishedSession.getSessionDuration().inSeconds / session.getSessionDuration().inSeconds) * 100
-        ).toStringAsFixed(0)} %'
+        ).toStringAsFixed(0)}%'
     );
 }
   Widget timeDisplay() {

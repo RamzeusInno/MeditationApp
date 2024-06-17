@@ -14,7 +14,7 @@ class Session {
   }
 
   int numberOfPhases() {
-    return _repetitions * 2;
+    return (_sessionDuration.inSeconds / (_periodDuration.inSeconds / 2)).toInt();
   }
 
   Duration getPhaseDuration() {

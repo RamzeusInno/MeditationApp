@@ -18,14 +18,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         title: const Text("Contrast shower app"),
         backgroundColor: Colors.blue[900],
       ),
-      body: Center(
+      body: Container(
+        margin: const EdgeInsets.all(64),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
            ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/session_preferences');
               },
-              child: const Text("Start session")
+              child: const Text("Start new session")
               ),
               const SessionListWidget(),
           ]
