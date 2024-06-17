@@ -110,10 +110,13 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
         ),
       ) 
       :
-     ElevatedButton(
-      onPressed: () => startTimer(),
-       child: const Text('Start timer'),
-      );
+     Padding(
+       padding: const EdgeInsets.all(24.0),
+       child: ElevatedButton(
+        onPressed: () => startTimer(),
+         child: const Text('Start timer'),
+        ),
+     );
   }
 
 void endSession() {

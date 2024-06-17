@@ -39,6 +39,7 @@ class _SessionListWidgetState extends ConsumerState<SessionListWidget> {
               ListView.builder(
                 shrinkWrap: true,
                 itemCount: sessions.length,
+                itemExtent: 64,
                 itemBuilder: (context, index) {
                   return Container(
                     margin: const EdgeInsets.fromLTRB(300, 0, 300, 0),
@@ -48,7 +49,7 @@ class _SessionListWidgetState extends ConsumerState<SessionListWidget> {
                       color: Colors.grey[300]
                     ),
                       child: Center(child: Text(
-                        'Session number ${index + 1}\n${sessions[index]}',
+                        'Session number${index + 1}\n${sessions[index]}',
                       ),
                     )
                   );

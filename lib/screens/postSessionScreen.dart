@@ -19,19 +19,27 @@ class _PostSessionScreenState extends ConsumerState<PostSessionScreen> {
         backgroundColor: Colors.blue[900],
       ),
       body: Center(
-        child: Center(
-          child: Column(
-            children: [
-               const SessionSummaryWidget(),
-               ElevatedButton(
-                 onPressed: () {
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SessionSummaryWidget(),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ElevatedButton(
+                onPressed: () {
                   Navigator.popUntil(context, ModalRoute.withName('/'));
-                },              
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 child: const Text('Main screen'),
-               ),
-            ],
-          )
-        )
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

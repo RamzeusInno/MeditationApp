@@ -1,5 +1,5 @@
 import 'package:contrast_shower_appplication/providers/colorProvider.dart';
-import 'package:contrast_shower_appplication/providers/selectedSessionProvider.dart';
+import 'package:contrast_shower_appplication/widgets/homeButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:contrast_shower_appplication/widgets/timerWidget.dart';
@@ -24,7 +24,9 @@ class _SessionscreenState extends ConsumerState<SessionScreen> {
         
         return Scaffold(
           appBar: AppBar(
-            //bottom: 
+            actions: const [
+              HomeButtonWidget(),
+            ],
             title: const Text("Contrast shower session"),
             backgroundColor: Colors.blue[900],
           ),

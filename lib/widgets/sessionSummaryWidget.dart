@@ -1,9 +1,8 @@
-import 'package:contrast_shower_appplication/providers/sessionProvider.dart';
-import 'package:contrast_shower_appplication/session.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:contrast_shower_appplication/providers/sessionProvider.dart';
+import 'package:contrast_shower_appplication/session.dart';
 import 'package:contrast_shower_appplication/providers/selectedSessionProvider.dart';
-
 
 class SessionSummaryWidget extends ConsumerStatefulWidget {
   const SessionSummaryWidget({super.key});
@@ -15,7 +14,17 @@ class SessionSummaryWidget extends ConsumerStatefulWidget {
 class _SessionSummaryWidgetState extends ConsumerState<SessionSummaryWidget> {
   @override
   Widget build(BuildContext context) {
-    return finishedSessionInfo();
+    return Card(
+      shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+      ),
+      elevation: 5,
+      margin: const EdgeInsets.all(16),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: finishedSessionInfo(),
+      ),
+    );
   }
 
   Text finishedSessionInfo() {
@@ -29,7 +38,9 @@ class _SessionSummaryWidgetState extends ConsumerState<SessionSummaryWidget> {
       'Expected session time: ${Session.formattedDuration(session.getSessionDuration())}\n'
       'Task completion rate: ${(
         (finishedSession.getSessionDuration().inSeconds / session.getSessionDuration().inSeconds) * 100
-        ).toStringAsFixed(0)} %',
+        ).toStringAsFixed(0)}%',
+        
+      style: const TextStyle(fontSize: 24),
     );
   }
 }
