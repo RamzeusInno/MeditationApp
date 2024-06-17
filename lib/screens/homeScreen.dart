@@ -1,3 +1,4 @@
+import 'package:contrast_shower_appplication/widgets/sessionListWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,14 +19,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         backgroundColor: Colors.blue[900],
       ),
       body: Center(
-        child: ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/session_preferences');
-            },
-            child: const Text("Start session")
-            ),
+        child: Column(
+          children: [
+           ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/session_preferences');
+              },
+              child: const Text("Start session")
+              ),
+              const SessionListWidget(),
+          ]
+        ),
       ),
-      // TODO: Add previous session display
     );
   }
 }
+
+

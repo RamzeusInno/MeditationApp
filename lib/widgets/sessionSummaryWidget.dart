@@ -19,17 +19,17 @@ class _SessionSummaryWidgetState extends ConsumerState<SessionSummaryWidget> {
   }
 
   Text finishedSessionInfo() {
-      final Session finishedSession = ref.watch(finishedSessionNotifierProvider.notifier).lastSession();
-      final Session session = ref.watch(selectedSessionNotifierProvider);
+    final Session finishedSession = ref.watch(finishedSessionNotifierProvider.notifier).lastSession();
+    final Session session = ref.watch(selectedSessionNotifierProvider);
 
-      return Text(
-        'Phases finished: ${finishedSession.numberOfPhases()}/${session.numberOfPhases()}\n'
-        'Periods finished: ${finishedSession.numberOfPeriods()}/${session.numberOfPeriods()}\n'
-        'Session time: ${Session.formattedDuration(finishedSession.getSessionDuration())}\n'
-        'Expected session time: ${Session.formattedDuration(session.getSessionDuration())}\n'
-        'Task completion rate: ${(
-          (finishedSession.getSessionDuration().inSeconds / session.getSessionDuration().inSeconds) * 100
-          ).toStringAsFixed(0)} %',
-      );
-    }
+    return Text(
+      'Phases finished: ${finishedSession.numberOfPhases()}/${session.numberOfPhases()}\n'
+      'Periods finished: ${finishedSession.numberOfPeriods()}/${session.numberOfPeriods()}\n'
+      'Session time: ${Session.formattedDuration(finishedSession.getSessionDuration())}\n'
+      'Expected session time: ${Session.formattedDuration(session.getSessionDuration())}\n'
+      'Task completion rate: ${(
+        (finishedSession.getSessionDuration().inSeconds / session.getSessionDuration().inSeconds) * 100
+        ).toStringAsFixed(0)} %',
+    );
+  }
 }

@@ -5,6 +5,9 @@ import 'package:contrast_shower_appplication/session.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:async';
+import 'package:intl/intl.dart';
+
+import 'package:hive/hive.dart';
 
 
 class Timerwidget extends ConsumerStatefulWidget {
@@ -18,6 +21,13 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
   late Duration sessionDuration;
   bool sessionDurationInitialized = false;
   Timer? timer;
+  late Box<String> box;
+
+  @override
+  void initState() {
+    super.initState();
+    box = Hive.box<String>('sessionBox');
+  }
 
   void startTimer() {
     final Session session = ref.watch(selectedSessionNotifierProvider);
@@ -118,6 +128,13 @@ void addFinishedSession() {
 
   Session finishedSession = Session.sessionAndPeriodDurationInit(session.getSessionDuration() - sessionDuration, session.getPeriodDuration());
   finishedSessions.addSession(finishedSession);
+  box.add(
+      'Time: ${DateFormat('dd/MM/yyyy HH:mm').format(DateTime.now())}'
+      'Session time: ${Session.formattedDuration(finishedSession.getSessionDuration())}\n'
+      'Task completion rate: ${(
+        (finishedSession.getSessionDuration().inSeconds / session.getSessionDuration().inSeconds) * 100
+        ).toStringAsFixed(0)} %'
+    );
 }
   Widget timeDisplay() {
     final Session session = ref.watch(selectedSessionNotifierProvider);

@@ -16,8 +16,16 @@ class SessionNotifier extends Notifier<List<Session>> {
     state = state.where((element) => element != session).toList();
   }
 
+  void setSessions(List<Session> sessions) {
+    state = sessions;
+  }
+
   Session lastSession() {
     return state.last;
+  }
+
+  List<Session> getSessions() {
+    return state;
   }
 }
 
