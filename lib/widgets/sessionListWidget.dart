@@ -39,21 +39,26 @@ class _SessionListWidgetState extends ConsumerState<SessionListWidget> {
               ListView.builder(
                 shrinkWrap: true,
                 itemCount: sessions.length,
-                itemExtent: 64,
+                itemExtent: 80,
                 itemBuilder: (context, index) {
-                  return Container(
-                    margin: const EdgeInsets.fromLTRB(300, 0, 300, 0),
-                    decoration: BoxDecoration(
+                  if ((index < (sessions.length - 5)) && sessions.length > 5) {return Container();}
+                  else {
+                     return Container(
+                      margin: const EdgeInsets.fromLTRB(300, 8, 300, 8),
+                      decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.grey[300]
                     ),
                       child: Center(child: Text(
-                        'Session number${index + 1}\n${sessions[index]}',
-                      ),
-                    )
-                  );
-                },
+                        'Session number ${
+                          (sessions.length <= 5) ? index + 1 : index + 1 - sessions.length - 5
+                        }\n${sessions[index]}',
+                        ),
+                      )
+                    );
+                  }
+                }
               ),
 
             ],
