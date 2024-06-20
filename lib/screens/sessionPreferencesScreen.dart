@@ -15,7 +15,19 @@ class _sessionPreferencesScreenState extends ConsumerState<SessionPreferencesScr
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Session preferences"),
+        title: const Text(
+          "Session preferences",
+          style: TextStyle(
+            color: Colors.white,
+            shadows: <Shadow>[
+              Shadow(
+                offset: Offset(2.0, 2.0),
+                blurRadius: 3.0,
+                color: Colors.black,
+              ),
+            ],
+          ),
+          ),
         backgroundColor: Colors.blue[900],
       ),
       body: SessionDurationForm()

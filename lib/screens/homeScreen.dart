@@ -15,11 +15,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Contrast shower app"),
+        title: const Text(
+          "Contrast shower app",
+          style: TextStyle(
+            color: Colors.white,
+            shadows: <Shadow>[
+              Shadow(
+                offset: Offset(2.0, 2.0),
+                blurRadius: 3.0,
+                color: Colors.black,
+              ),
+            ],
+          ),
+
+          ),
         backgroundColor: Colors.blue[900],
       ),
       body: Container(
-        margin: const EdgeInsets.all(64),
+        margin: const EdgeInsets.all(30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

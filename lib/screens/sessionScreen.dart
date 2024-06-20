@@ -27,7 +27,19 @@ class _SessionscreenState extends ConsumerState<SessionScreen> {
             actions: const [
               HomeButtonWidget(),
             ],
-            title: const Text("Contrast shower session"),
+            title: const Text(
+              "Contrast shower session",
+              style: TextStyle(
+              color: Colors.white,
+              shadows: <Shadow>[
+                Shadow(
+                  offset: Offset(2.0, 2.0),
+                  blurRadius: 3.0,
+                  color: Colors.black,
+                ),
+              ],
+          ),
+              ),
             backgroundColor: Colors.blue[900],
           ),
           body: Container(

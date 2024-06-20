@@ -15,7 +15,19 @@ class _PostSessionScreenState extends ConsumerState<PostSessionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Session Summary"),
+        title: const Text(
+          "Session Summary",
+          style: TextStyle(
+            color: Colors.white,
+            shadows: <Shadow>[
+              Shadow(
+                offset: Offset(2.0, 2.0),
+                blurRadius: 3.0,
+                color: Colors.black,
+              ),
+            ],
+          ),
+          ),
         backgroundColor: Colors.blue[900],
       ),
       body: Center(
