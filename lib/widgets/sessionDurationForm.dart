@@ -79,7 +79,7 @@ class _SessionDurationFormState extends ConsumerState<SessionDurationForm> {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: const Text('Dialog Title'),
+                    title: const Text('Session overview'),
                     content: const SessionOverviewWidget(),
                     actions: [
                       TextButton(

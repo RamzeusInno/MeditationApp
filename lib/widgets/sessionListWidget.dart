@@ -44,7 +44,11 @@ class _SessionListWidgetState extends ConsumerState<SessionListWidget> {
                   if ((index < (sessions.length - 5)) && sessions.length > 5) {return Container();}
                   else {
                      return Container(
-                      margin: const EdgeInsets.fromLTRB(300, 8, 300, 8),
+                      margin: const EdgeInsets.all(8),
+                      constraints: const BoxConstraints.tightFor(
+                        width: double.minPositive,
+                        height: double.minPositive,
+                      ),
                       decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(10),

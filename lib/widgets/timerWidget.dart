@@ -19,6 +19,7 @@ class Timerwidget extends ConsumerStatefulWidget {
 
 class _TimerwidgetState extends ConsumerState<Timerwidget> {
   late Duration sessionDuration;
+  late Duration phaseDuration;
   bool sessionDurationInitialized = false;
   Timer? timer;
   late Box<String> box;
@@ -40,6 +41,10 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
           return;
         }
 
+        if (phaseDuration.inSeconds <= 0) {
+          phaseDuration = session.getPhaseDuration();
+        }
+
         int dif = session.getSessionDuration().inSeconds - sessionDuration.inSeconds;
         int periodDuration = session.getPhaseDuration().inSeconds;
         if (dif % periodDuration == 0) {
@@ -51,6 +56,7 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
         }
 
         sessionDuration -= const Duration(seconds: 1);
+        phaseDuration -= const Duration(seconds: 1);
       });
     }
     );
@@ -63,6 +69,7 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
 
     if (!sessionDurationInitialized) {
       sessionDuration = session.getSessionDuration();
+      phaseDuration = session.getPhaseDuration();
       sessionDurationInitialized = true;
     }
 
@@ -71,7 +78,11 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
         padding: const EdgeInsets.all(24.0),
         child: Column(
           children: [
-            timeDisplay(),
+            const Text("Session Timer", style: TextStyle(fontSize: 20),),
+            mainTimerDisplay(),
+            const SizedBox(height: 20),
+            const Text("Phase Timer", style: TextStyle(fontSize: 20),),
+            phaseTimerDisplay(),
             startTimerButton(),
           ],
         ),
@@ -140,7 +151,38 @@ void addFinishedSession() {
         ).toStringAsFixed(0)}%'
     );
 }
-  Widget timeDisplay() {
+  Widget mainTimerDisplay() {
+    final Session session = ref.watch(selectedSessionNotifierProvider);
+
+    return SizedBox(
+      width: 220,
+      height: 220,
+
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          CircularProgressIndicator(
+            value: 1 - sessionDuration.inSeconds / session.getSessionDuration().inSeconds,
+            valueColor: AlwaysStoppedAnimation(Colors.green[500]),
+            backgroundColor: Colors.white,
+          ),
+      
+          Center(
+            child: Text(
+            '${sessionDuration.inMinutes.toString().padLeft(2, '0')}:${(sessionDuration.inSeconds % 60).toString().padLeft(2, '0')}',
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 70.0,
+              ),
+            ),
+          )
+          
+        ],
+      ),
+    );
+  }
+
+  Widget phaseTimerDisplay() {
     final Session session = ref.watch(selectedSessionNotifierProvider);
 
     return SizedBox(
@@ -151,14 +193,14 @@ void addFinishedSession() {
         fit: StackFit.expand,
         children: [
           CircularProgressIndicator(
-            value: 1 - sessionDuration.inSeconds / session.getSessionDuration().inSeconds,
-            valueColor: AlwaysStoppedAnimation(Colors.green[400]),
+            value: 1 - phaseDuration.inSeconds / session.getPhaseDuration().inSeconds,
+            valueColor: AlwaysStoppedAnimation(Colors.green[300]),
             backgroundColor: Colors.white,
           ),
       
           Center(
             child: Text(
-            '${sessionDuration.inMinutes.toString().padLeft(2, '0')}:${(sessionDuration.inSeconds % 60).toString().padLeft(2, '0')}',
+            '${phaseDuration.inMinutes.toString().padLeft(2, '0')}:${(phaseDuration.inSeconds % 60).toString().padLeft(2, '0')}',
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 70.0,
