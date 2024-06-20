@@ -1,4 +1,5 @@
 import 'package:contrast_shower_appplication/session.dart';
+import 'package:contrast_shower_appplication/widgets/sessionOverviewWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:contrast_shower_appplication/providers/selectedSessionProvider.dart';
@@ -65,6 +66,7 @@ class _SessionDurationFormState extends ConsumerState<SessionDurationForm> {
       padding: const EdgeInsets.all(24.0),
       child: ElevatedButton(
         onPressed: () {
+          
           if (_formKey.currentState?.validate() == true) {
             Session session = Session(
               Duration(minutes: _minutes, seconds: _seconds) * 2, // 2 phases in a period
@@ -72,7 +74,24 @@ class _SessionDurationFormState extends ConsumerState<SessionDurationForm> {
             );
 
             ref.read(selectedSessionNotifierProvider.notifier).setSession(session);
-            Navigator.pushNamed(context, '/session_overview');
+
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Dialog Title'),
+                    content: const SessionOverviewWidget(),
+                    actions: [
+                      TextButton(
+                        child: const Text('Back'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
           }
         },
         child: const Text('Submit'),

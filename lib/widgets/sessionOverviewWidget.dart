@@ -1,24 +1,19 @@
 import 'package:contrast_shower_appplication/providers/selectedSessionProvider.dart';
-import 'package:contrast_shower_appplication/session.dart';
-import 'package:contrast_shower_appplication/widgets/homeButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SessionOverviewScreen extends ConsumerWidget {
-  const SessionOverviewScreen({Key? key}) : super(key: key);
+class SessionOverviewWidget extends ConsumerStatefulWidget {
+  const SessionOverviewWidget({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<SessionOverviewWidget> createState() => _SessionOverviewWidgetState();
+}
+
+class _SessionOverviewWidgetState extends ConsumerState<SessionOverviewWidget> {
+  @override
+  Widget build(BuildContext context) {
     final selectedSession = ref.watch(selectedSessionNotifierProvider);
-    return Scaffold(
-      appBar: AppBar(
-        actions: const [
-          HomeButtonWidget(),
-        ],
-        title: const Center(child: Text("Session overview")),
-        backgroundColor: Colors.blue[900],
-      ),
-      body: Padding(
+    return Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
           child: Column(
@@ -54,7 +49,6 @@ class SessionOverviewScreen extends ConsumerWidget {
             ],
           ),
         ),
-      )
-    );
+      );
   }
 }
