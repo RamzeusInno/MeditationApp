@@ -1,7 +1,9 @@
 import 'package:contrast_shower_appplication/providers/colorProvider.dart';
+import 'package:contrast_shower_appplication/providers/ratingProvider.dart';
 import 'package:contrast_shower_appplication/providers/selectedSessionProvider.dart';
 import 'package:contrast_shower_appplication/providers/sessionProvider.dart';
 import 'package:contrast_shower_appplication/session.dart';
+import 'package:contrast_shower_appplication/widgets/ratingWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:async';
@@ -38,6 +40,7 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
       setState(() {
         if (sessionDuration.inSeconds <= 0) {
           endSession();
+          colorNotifier.setColor(Colors.white);
           return;
         }
 
@@ -130,15 +133,21 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
      );
   }
 
-void endSession() {
-  setState(() => timer?.cancel());
+void endSession() async {
+  setState(() => timer?.cancel()); 
+
+  await showDialog(context: context, builder: (BuildContext context) {
+    return RatingDialog();
+  });
+
   addFinishedSession();
   Navigator.pushNamed(context, '/post_session');
 }
 
 void addFinishedSession() {
   final finishedSessions = ref.watch(finishedSessionNotifierProvider.notifier);
-  final Session session = ref.watch(selectedSessionNotifierProvider);
+  final session = ref.watch(selectedSessionNotifierProvider);
+  final rating = ref.watch(ratingNotifierProvider);
 
   Session finishedSession = Session.sessionAndPeriodDurationInit(session.getSessionDuration() - sessionDuration, session.getPeriodDuration());
   finishedSessions.addSession(finishedSession);
@@ -148,7 +157,8 @@ void addFinishedSession() {
       'Session time: ${Session.formattedDuration(finishedSession.getSessionDuration())}\n'
       'Task completion rate: ${(
         (finishedSession.getSessionDuration().inSeconds / session.getSessionDuration().inSeconds) * 100
-        ).toStringAsFixed(0)}%'
+        ).toStringAsFixed(0)}%\n'
+      'Rating: ${rating == '' ? 'No rating' : '$rating/5'}'
     );
 }
   Widget mainTimerDisplay() {
