@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:contrast_shower_appplication/widgets/timerWidget.dart';
 import 'dart:async';
+import 'audio_player.dart';
+import 'package:contrast_shower_appplication/providers/selected_song_provider.dart';
+
 
 
 class SessionScreen extends ConsumerStatefulWidget {
@@ -15,6 +18,38 @@ class SessionScreen extends ConsumerStatefulWidget {
 
 class _SessionscreenState extends ConsumerState<SessionScreen> {
   Timer? timer;
+  final AudioPlayerManager audioPlayerManager = AudioPlayerManager();
+  bool isAudioPlayerInitialized = false;
+
+  @override
+  void initState() {
+    super.initState();
+    initializeAudioPlayer();
+  }
+
+  Future<void> initializeAudioPlayer() async {
+    await audioPlayerManager.init();
+    isAudioPlayerInitialized = true;
+    if (mounted) {
+      setState(() {});
+    }
+    playAudio();
+  }
+
+void playAudio() {
+  if (isAudioPlayerInitialized) {
+    final selectedSongPath = ref.watch(selectedSongProvider);
+    audioPlayerManager.playAudio(selectedSongPath);
+  }
+}
+
+
+  @override
+  void dispose() {
+    super.dispose();
+    audioPlayerManager.stopAudio();
+    audioPlayerManager.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:contrast_shower_appplication/widgets/sessionDurationForm.dart';
+import 'package:contrast_shower_appplication/widgets/song_selection_widget.dart';
 
 
 class SessionPreferencesScreen extends ConsumerStatefulWidget {
@@ -27,10 +28,17 @@ class _sessionPreferencesScreenState extends ConsumerState<SessionPreferencesScr
               ),
             ],
           ),
-          ),
+        ),
         backgroundColor: Colors.blue[900],
       ),
-      body: SessionDurationForm()
+      body: Column(
+        children: [
+          Expanded(
+            child: SessionDurationForm(),
+          ),
+          SongSelectionWidget(),
+        ],
+      ),
     );
   }
 }
