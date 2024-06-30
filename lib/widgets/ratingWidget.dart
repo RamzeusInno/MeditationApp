@@ -1,3 +1,5 @@
+import 'package:contrast_shower_appplication/providers/comment_provider.dart';
+import 'package:contrast_shower_appplication/providers/comment_provider.dart';
 import 'package:contrast_shower_appplication/providers/ratingProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,7 +23,7 @@ class _RatingDialogState extends ConsumerState<RatingDialog> {
           const SizedBox(height: 8),
           TextField(
             onChanged: (text) {
-              // Handle text changes here
+              ref.read(commentNotifierProvider.notifier).setComment(text);
             },
             maxLines: 2,
           ),
