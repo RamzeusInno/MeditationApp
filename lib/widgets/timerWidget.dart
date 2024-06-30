@@ -1,4 +1,3 @@
-import 'package:contrast_shower_appplication/providers/colorProvider.dart';
 import 'package:contrast_shower_appplication/providers/ratingProvider.dart';
 import 'package:contrast_shower_appplication/providers/selectedSessionProvider.dart';
 import 'package:contrast_shower_appplication/providers/selected_song_provider.dart';
@@ -45,30 +44,17 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
 
   void startTimer() {
     final Session session = ref.watch(selectedSessionNotifierProvider);
-    final colorNotifier = ref.read(colorNotifierProvider.notifier);
 
     timer = Timer.periodic(const Duration(seconds: 1), (_){
       setState(() {
         if (sessionDuration.inSeconds <= 0) {
           endSession();
-          colorNotifier.setColor(Colors.white);
           return;
         }
 
         if (phaseDuration.inSeconds <= 0) {
           phaseDuration = session.getPhaseDuration();
         }
-
-        int dif = session.getSessionDuration().inSeconds - sessionDuration.inSeconds;
-        int periodDuration = session.getPhaseDuration().inSeconds;
-        if (dif % periodDuration == 0) {
-          if (dif % (2 * periodDuration) == 0) {
-            colorNotifier.setColor(Colors.blue);
-          } else {
-            colorNotifier.setColor(Colors.red);
-          }
-        }
-
         sessionDuration -= const Duration(seconds: 1);
         phaseDuration -= const Duration(seconds: 1);
       });
