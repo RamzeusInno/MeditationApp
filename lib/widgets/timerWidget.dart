@@ -27,6 +27,7 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
   Timer? timer;
   late Box<String> box;
   final AudioPlayerManager audioPlayerManager = AudioPlayerManager();
+  String _breathingStatus = 'Breathe in';
 
   @override
   void initState() {
@@ -48,13 +49,24 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
     timer = Timer.periodic(const Duration(seconds: 1), (_){
       setState(() {
         if (sessionDuration.inSeconds <= 0) {
-          endSession();
+          endSession(); 
           return;
         }
 
         if (phaseDuration.inSeconds <= 0) {
           phaseDuration = session.getPhaseDuration();
         }
+        
+        int dif = session.getSessionDuration().inSeconds - sessionDuration.inSeconds;
+        int periodDuration = session.getPhaseDuration().inSeconds;
+        if (dif % periodDuration == 0) {
+          if (dif % (2 * periodDuration) == 0) {
+            _breathingStatus = 'Breathe in';
+          } else {
+            _breathingStatus = 'Breathe out';
+          }
+        }
+
         sessionDuration -= const Duration(seconds: 1);
         phaseDuration -= const Duration(seconds: 1);
       });
@@ -81,7 +93,7 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
             const Text("Session Timer", style: TextStyle(fontSize: 20),),
             mainTimerDisplay(),
             const SizedBox(height: 20),
-            const Text("Phase Timer", style: TextStyle(fontSize: 20),),
+            Text(_breathingStatus, style: const TextStyle(fontSize: 20),),
             phaseTimerDisplay(),
             startTimerButton(),
           ],
