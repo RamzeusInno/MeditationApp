@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:contrast_shower_appplication/providers/selected_song_provider.dart';
+import 'package:meditation_app/providers/selected_song_provider.dart';
 
 class SongSelectionWidget extends ConsumerStatefulWidget {
   const SongSelectionWidget({super.key});

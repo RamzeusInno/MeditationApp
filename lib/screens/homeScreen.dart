@@ -1,4 +1,4 @@
-import 'package:contrast_shower_appplication/widgets/sessionListWidget.dart';
+import 'package:meditation_app/widgets/sessionListWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,7 +16,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Contrast shower app",
+          "Meditation App",
           style: TextStyle(
             color: Colors.white,
             shadows: <Shadow>[
