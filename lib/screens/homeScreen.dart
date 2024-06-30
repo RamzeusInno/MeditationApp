@@ -1,7 +1,7 @@
+import 'package:contrast_shower_appplication/widgets/default_app_bar.dart';
 import 'package:contrast_shower_appplication/widgets/sessionListWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -14,35 +14,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Contrast shower app",
-          style: TextStyle(
-            color: Colors.white,
-            shadows: <Shadow>[
-              Shadow(
-                offset: Offset(2.0, 2.0),
-                blurRadius: 3.0,
-                color: Colors.black,
-              ),
-            ],
-          ),
-
-          ),
-        backgroundColor: Colors.blue[900],
-      ),
+      appBar: DefaultAppBar(title: "Meditation Helper", ref: ref),
       body: Container(
         margin: const EdgeInsets.all(30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-           ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/session_preferences');
-              },
-              child: const Text("Start new session")
-              ),
-              const SessionListWidget(),
+            const SessionListWidget(),
+            FilledButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/session_preferences');
+                },
+                child: const Text("Start new session")
+            )
           ]
         ),
       ),
