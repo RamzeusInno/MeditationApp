@@ -17,6 +17,15 @@ class _RatingDialogState extends ConsumerState<RatingDialog> {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
+          const Text('Write your feelings/thoughts during the session'),
+          const SizedBox(height: 8),
+          TextField(
+            onChanged: (text) {
+              // Handle text changes here
+            },
+            maxLines: 2,
+          ),
+          const SizedBox(height: 8),
           const Text('How would you rate your experience?'),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -33,7 +42,9 @@ class _RatingDialogState extends ConsumerState<RatingDialog> {
                   });
                 },
               );
-            }),
+            },
+    
+            ),
           ),
         ],
       ),
