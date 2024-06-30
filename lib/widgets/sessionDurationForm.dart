@@ -1,8 +1,8 @@
-import 'package:contrast_shower_appplication/session.dart';
-import 'package:contrast_shower_appplication/widgets/sessionOverviewWidget.dart';
+import 'package:meditation_app/session.dart';
+import 'package:meditation_app/widgets/sessionOverviewWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:contrast_shower_appplication/providers/selectedSessionProvider.dart';
+import 'package:meditation_app/providers/selectedSessionProvider.dart';
 
 class SessionDurationForm extends ConsumerStatefulWidget {
   @override

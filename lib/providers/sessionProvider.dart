@@ -1,4 +1,4 @@
-import 'package:contrast_shower_appplication/session.dart';
+import 'package:meditation_app/session.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
