@@ -1,3 +1,4 @@
+import 'package:contrast_shower_appplication/providers/flag_provider.dart';
 import 'package:contrast_shower_appplication/providers/ratingProvider.dart';
 import 'package:contrast_shower_appplication/providers/selectedSessionProvider.dart';
 import 'package:contrast_shower_appplication/providers/selected_song_provider.dart';
@@ -5,6 +6,7 @@ import 'package:contrast_shower_appplication/providers/sessionProvider.dart';
 import 'package:contrast_shower_appplication/screens/audio_player.dart';
 import 'package:contrast_shower_appplication/session.dart';
 import 'package:contrast_shower_appplication/widgets/ratingWidget.dart';
+import 'package:contrast_shower_appplication/widgets/heartbeat_animation_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:async';
@@ -67,6 +69,8 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
           }
         }
 
+        ref.watch(flagNotifierProvider.notifier).setFlag(true);
+
         sessionDuration -= const Duration(seconds: 1);
         phaseDuration -= const Duration(seconds: 1);
       });
@@ -92,9 +96,12 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
           children: [
             const Text("Session Timer", style: TextStyle(fontSize: 20),),
             mainTimerDisplay(),
-            const SizedBox(height: 20),
+            const SizedBox(height: 16),
             Text(_breathingStatus, style: const TextStyle(fontSize: 20),),
             phaseTimerDisplay(),
+            const SizedBox(height: 16),
+            HeartbeatAnimation(),
+            const SizedBox(height: 16),
             startTimerButton(),
           ],
         ),
@@ -124,9 +131,11 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
               if (timerIsRunning) { 
                 setState(() => timer?.cancel());
                 audioPlayerManager.stopAudio();
+                ref.watch(flagNotifierProvider.notifier).setFlag(false);
               } else {
                 startTimer();
                 audioPlayerManager.resumeAudio();
+                ref.watch(flagNotifierProvider.notifier).setFlag(true);
               }
             },
               child: timerIsRunning ? const Text('Pause') : const Text('Resume'),
@@ -160,6 +169,7 @@ void endSession() async {
   setState(() => timer?.cancel()); 
   audioPlayerManager.stopAudio();
   audioPlayerManager.dispose();
+  ref.watch(flagNotifierProvider.notifier).setFlag(false);
 
   await showDialog(context: context, builder: (BuildContext context) {
     return RatingDialog();
@@ -190,8 +200,8 @@ void addFinishedSession() {
     final Session session = ref.watch(selectedSessionNotifierProvider);
 
     return SizedBox(
-      width: 220,
-      height: 220,
+      width: 150,
+      height: 150,
 
       child: Stack(
         fit: StackFit.expand,
@@ -207,7 +217,7 @@ void addFinishedSession() {
             '${sessionDuration.inMinutes.toString().padLeft(2, '0')}:${(sessionDuration.inSeconds % 60).toString().padLeft(2, '0')}',
             style: const TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 70.0,
+              fontSize: 40.0,
               ),
             ),
           )
@@ -221,8 +231,8 @@ void addFinishedSession() {
     final Session session = ref.watch(selectedSessionNotifierProvider);
 
     return SizedBox(
-      width: 200,
-      height: 200,
+      width: 130,
+      height: 130,
 
       child: Stack(
         fit: StackFit.expand,
@@ -238,7 +248,7 @@ void addFinishedSession() {
             '${phaseDuration.inMinutes.toString().padLeft(2, '0')}:${(phaseDuration.inSeconds % 60).toString().padLeft(2, '0')}',
             style: const TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 70.0,
+              fontSize: 40.0,
               ),
             ),
           )
