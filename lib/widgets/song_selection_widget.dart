@@ -14,37 +14,68 @@ class _SongSelectionWidgetState extends ConsumerState<SongSelectionWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Text("Choose a song:"),
-        ...List.generate(
-          3,
-          (index) => RadioListTile<int>(
-            title: Text("Song ${index + 1}"),
-            value: index,
-            groupValue: _selectedSongIndex,
-            onChanged: (value) {
-              setState(() {
-                _selectedSongIndex = value!;
-                ref.read(selectedSongProvider.notifier).state = getSongPath(index + 1);
-              });
-            },
+      return ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 300),
+        child: Column(
+        children: [
+          const Text("Choose a song:"),
+          ...List.generate(
+            2,
+            (index) => RadioListTile<int>(
+              title: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.grey,
+                    width: 1,
+                  )
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      getButtonName(index),
+                      style: const TextStyle(
+                        fontSize: 20,
+                      ),
+                      ),
+                    const SizedBox(width:8),
+                    Image.asset(
+                      getIconPath(index),
+                      width: 50,
+                      height: 50,
+                    ),
+                  ],
+                ),
+              ),
+              value: index,
+              groupValue: _selectedSongIndex,
+              onChanged: (value) {
+                setState(() {
+                  _selectedSongIndex = value!;
+                  ref.read(selectedSongProvider.notifier).state = getSongPath(index);
+                  print(getSongPath(index));
+                });
+              },
+              dense: true,
+            ),
           ),
-        ),
-      ],
-    );
+        ],
+            ),
+      );
+  }
+
+  String getButtonName(int buttonNumber) {
+    final buttonNames = ['Beach', 'Birds'];
+    return buttonNames[buttonNumber];
   }
 
   String getSongPath(int songNumber) {
-    switch (songNumber) {
-      case 1:
-        return 'audio/sea_sound.mp3'; 
-      case 2:
-        return 'audio/birds.mp3'; 
-      case 3:
-        return 'audio/waterfall.mp3'; 
-      default:
-        throw ArgumentError('Invalid song number: $songNumber');
-    }
+    final songNames = ['sea_sound', 'birds'];
+    return "./assets/audio/${songNames[songNumber]}.mp3";
+  }
+
+  String getIconPath(int iconNumber) {
+    final iconNames = ['beach_icon', 'bird_icon'];
+    return "./assets/icons/${iconNames[iconNumber ]}.png";
   }
 }

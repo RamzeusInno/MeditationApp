@@ -1,7 +1,9 @@
 import 'package:contrast_shower_appplication/providers/colorProvider.dart';
 import 'package:contrast_shower_appplication/providers/ratingProvider.dart';
 import 'package:contrast_shower_appplication/providers/selectedSessionProvider.dart';
+import 'package:contrast_shower_appplication/providers/selected_song_provider.dart';
 import 'package:contrast_shower_appplication/providers/sessionProvider.dart';
+import 'package:contrast_shower_appplication/screens/audio_player.dart';
 import 'package:contrast_shower_appplication/session.dart';
 import 'package:contrast_shower_appplication/widgets/ratingWidget.dart';
 import 'package:flutter/material.dart';
@@ -25,11 +27,20 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
   bool sessionDurationInitialized = false;
   Timer? timer;
   late Box<String> box;
+  final AudioPlayerManager audioPlayerManager = AudioPlayerManager();
 
   @override
   void initState() {
     super.initState();
     box = Hive.box<String>('sessionBox');
+    initializeAudioPlayer();
+  }
+
+  Future<void> initializeAudioPlayer() async {
+    await audioPlayerManager.init();
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   void startTimer() {
@@ -92,6 +103,13 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
       ),
     );
   }
+
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
  
   Widget startTimerButton() {
     final bool timerIsRunning = timer != null && timer!.isActive;
@@ -107,8 +125,10 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
             onPressed: () {
               if (timerIsRunning) { 
                 setState(() => timer?.cancel());
+                audioPlayerManager.stopAudio();
               } else {
                 startTimer();
+                audioPlayerManager.resumeAudio();
               }
             },
               child: timerIsRunning ? const Text('Pause') : const Text('Resume'),
@@ -127,14 +147,21 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
      Padding(
        padding: const EdgeInsets.all(24.0),
        child: ElevatedButton(
-        onPressed: () => startTimer(),
+        onPressed: () => {playAudio(), startTimer()},
          child: const Text('Start timer'),
         ),
      );
   }
 
+  void playAudio() {
+    final selectedSongPath = ref.watch(selectedSongProvider);
+    audioPlayerManager.playAudio(selectedSongPath);
+  }
+
 void endSession() async {
   setState(() => timer?.cancel()); 
+  audioPlayerManager.stopAudio();
+  audioPlayerManager.dispose();
 
   await showDialog(context: context, builder: (BuildContext context) {
     return RatingDialog();

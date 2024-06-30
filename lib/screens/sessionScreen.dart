@@ -17,40 +17,6 @@ class SessionScreen extends ConsumerStatefulWidget {
 }
 
 class _SessionscreenState extends ConsumerState<SessionScreen> {
-  Timer? timer;
-  final AudioPlayerManager audioPlayerManager = AudioPlayerManager();
-  bool isAudioPlayerInitialized = false;
-
-  @override
-  void initState() {
-    super.initState();
-    initializeAudioPlayer();
-  }
-
-  Future<void> initializeAudioPlayer() async {
-    await audioPlayerManager.init();
-    isAudioPlayerInitialized = true;
-    if (mounted) {
-      setState(() {});
-    }
-    playAudio();
-  }
-
-void playAudio() {
-  if (isAudioPlayerInitialized) {
-    final selectedSongPath = ref.watch(selectedSongProvider);
-    audioPlayerManager.playAudio(selectedSongPath);
-  }
-}
-
-
-  @override
-  void dispose() {
-    super.dispose();
-    audioPlayerManager.stopAudio();
-    audioPlayerManager.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Consumer(
