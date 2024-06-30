@@ -1,4 +1,3 @@
-import 'package:contrast_shower_appplication/providers/colorProvider.dart';
 import 'package:contrast_shower_appplication/widgets/homeButtonWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,9 +19,7 @@ class _SessionscreenState extends ConsumerState<SessionScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      builder: (context, ref, child) {
-        Color colorNotifier = ref.watch(colorNotifierProvider);
-        
+      builder: (context, ref, child) {        
         return Scaffold(
           appBar: AppBar(
             actions: const [
@@ -44,7 +41,7 @@ class _SessionscreenState extends ConsumerState<SessionScreen> {
             backgroundColor: Colors.blue[900],
           ),
           body: Container(
-            color: colorNotifier,
+            color: Colors.white,
             child: const Timerwidget(),
           ),
         );
