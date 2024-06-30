@@ -20,7 +20,7 @@ class _SongSelectionWidgetState extends ConsumerState<SongSelectionWidget> {
         children: [
           const Text("Choose a song:"),
           ...List.generate(
-            2,
+            3,
             (index) => RadioListTile<int>(
               title: Container(
                 decoration: BoxDecoration(
@@ -65,17 +65,17 @@ class _SongSelectionWidgetState extends ConsumerState<SongSelectionWidget> {
   }
 
   String getButtonName(int buttonNumber) {
-    final buttonNames = ['Beach', 'Birds'];
+    final buttonNames = ['Beach', 'Birds', 'Flute'];
     return buttonNames[buttonNumber];
   }
 
   String getSongPath(int songNumber) {
-    final songNames = ['sea_sound', 'birds'];
+    final songNames = ['sea_sound', 'birds', 'flute'];
     return "./assets/audio/${songNames[songNumber]}.mp3";
   }
 
   String getIconPath(int iconNumber) {
-    final iconNames = ['beach_icon', 'bird_icon'];
+    final iconNames = ['beach_icon', 'bird_icon', 'flute_icon'];
     return "./assets/icons/${iconNames[iconNumber ]}.png";
   }
 }
