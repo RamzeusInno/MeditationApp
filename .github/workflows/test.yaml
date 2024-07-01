@@ -21,6 +21,7 @@ jobs:
 
       - run: flutter test test/unit_test.dart
 
+<<<<<<< HEAD
       - run: flutter analyze --no-fatal-warnings --no-fatal-infos lib/
 
       - run: flutter build web --release lib/main.dart
@@ -29,6 +30,17 @@ jobs:
         with:
           customArgs: "lib/main.dart"
           
+
+      - run: flutter analyze --no-fatal-warnings --no-fatal-infos lib/
+
+
+      - run: flutter build web --release lib/main.dart
+      
+
+      - uses: bluefireteam/flutter-gh-pages@v7
+        with:
+          customArgs: "lib/main.dart"
+
   build:
     runs-on: windows-latest
     steps:
