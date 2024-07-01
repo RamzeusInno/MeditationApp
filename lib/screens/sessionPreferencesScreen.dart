@@ -36,7 +36,7 @@ class _sessionPreferencesScreenState extends ConsumerState<SessionPreferencesScr
           Expanded(
             child: SessionDurationForm(),
           ),
-          SongSelectionWidget(),
+          const SongSelectionWidget(),
         ],
       ),
     );

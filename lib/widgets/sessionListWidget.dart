@@ -1,9 +1,5 @@
-import 'package:meditation_app/providers/sessionProvider.dart';
-import 'package:meditation_app/session.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:meditation_app/providers/selectedSessionProvider.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 
 class SessionListWidget extends ConsumerStatefulWidget {
@@ -14,6 +10,17 @@ class SessionListWidget extends ConsumerStatefulWidget {
 }
 
 class _SessionListWidgetState extends ConsumerState<SessionListWidget> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    openBox();
+  }
+
+  Future<void> openBox() async {
+    await Hive.openBox<String>('sessionBox');
+  }
+
   @override
   Widget build(BuildContext context) {
      const int sessionsDisplayed = 3;

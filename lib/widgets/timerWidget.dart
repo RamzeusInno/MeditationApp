@@ -34,8 +34,13 @@ class _TimerwidgetState extends ConsumerState<Timerwidget> {
   @override
   void initState() {
     super.initState();
+    openBox();
     box = Hive.box<String>('sessionBox');
     initializeAudioPlayer();
+  }
+
+  Future<void> openBox() async {
+    await Hive.openBox<String>('sessionBox');
   }
 
   Future<void> initializeAudioPlayer() async {
