@@ -28,22 +28,26 @@ class _SessionDurationFormState extends ConsumerState<SessionDurationForm> {
     );
   }
 
-  Expanded sessionPreferences() {
-    return Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text("Time of a phase"),
-              periodDuration(),
-              Flexible(
-                flex: 1,
-                child: repetitionsForm(),
+  Row sessionPreferences() {
+    return Row(
+      children: [
+        Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text("Time of a phase"),
+                  periodDuration(),
+                  Flexible(
+                    flex: 1,
+                    child: repetitionsForm(),
+                  ),
+                    const SizedBox(width: 10),
+                    submitButton(),
+                  ],
               ),
-                const SizedBox(width: 10),
-                submitButton(),
-              ],
-          ),
-        );
+            ),
+      ],
+    );
   }
 
   TextFormField repetitionsForm() {
