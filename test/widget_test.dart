@@ -14,17 +14,14 @@ import 'package:meditation_app/widgets/timerWidget.dart';
 
 void main() {
   testWidgets('Start session buttton test', (tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const ProviderScope(child: MaterialApp(home: Timerwidget())));
+    await tester.pumpWidget(const ProviderScope(child: MaterialApp(home: Scaffold(body: Timerwidget(),))));
 
     final buttonFinder = find.text('Start timer');
     expect(buttonFinder, findsAny);
   
-    // Tap the '+' icon and trigger a frame.
     await tester.tap(buttonFinder);
     await tester.pump();
-
-    // // Verify that our counter has incremented.
+    
     expect(find.text('Start timer'), findsNothing);
     expect(find.text('Pause'), findsAny);
     expect(find.text('End session'), findsAny);
