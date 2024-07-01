@@ -1,4 +1,4 @@
-import "package:contrast_shower_appplication/providers/theme_provider.dart";
+import "package:meditation_app/providers/theme_provider.dart";
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 

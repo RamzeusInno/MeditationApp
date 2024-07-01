@@ -1,11 +1,11 @@
 import 'package:meditation_app/providers/flag_provider.dart';
-import 'package:meditation_app/providers/ratingProvider.dart';
-import 'package:meditation_app/providers/selectedSessionProvider.dart';
+import 'package:meditation_app/providers/rating_provider.dart';
+import 'package:meditation_app/providers/selected_session_provider.dart';
 import 'package:meditation_app/providers/selected_song_provider.dart';
-import 'package:meditation_app/providers/sessionProvider.dart';
-import 'package:meditation_app/screens/audio_player.dart';
+import 'package:meditation_app/providers/session_provider.dart';
+import 'package:meditation_app/audio_player.dart';
 import 'package:meditation_app/session.dart';
-import 'package:meditation_app/widgets/ratingWidget.dart';
+import 'package:meditation_app/widgets/rating_widget.dart';
 import 'package:meditation_app/widgets/heartbeat_animation_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

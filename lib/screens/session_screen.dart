@@ -1,13 +1,7 @@
-import 'package:contrast_shower_appplication/widgets/default_app_bar.dart';
-import 'package:contrast_shower_appplication/widgets/homeButtonWidget.dart';
-import 'package:meditation_app/widgets/homeButtonWidget.dart';
+import 'package:meditation_app/widgets/default_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:meditation_app/widgets/timerWidget.dart';
-import 'dart:async';
-import 'audio_player.dart';
-import 'package:meditation_app/providers/selected_song_provider.dart';
-
+import 'package:meditation_app/widgets/timer_widget.dart';
 
 
 class SessionScreen extends ConsumerStatefulWidget {

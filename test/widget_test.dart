@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:meditation_app/screens/sessionScreen.dart';
-import 'package:meditation_app/widgets/timerWidget.dart';
+import 'package:meditation_app/screens/session_screen.dart';
+import 'package:meditation_app/widgets/timer_widget.dart';
 
 void main() {
   testWidgets('Start session buttton test', (tester) async {

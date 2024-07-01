@@ -1,6 +1,5 @@
-import 'package:contrast_shower_appplication/widgets/default_app_bar.dart';
-import 'package:contrast_shower_appplication/widgets/sessionListWidget.dart';
-import 'package:meditation_app/widgets/sessionListWidget.dart';
+import 'package:meditation_app/widgets/default_app_bar.dart';
+import 'package:meditation_app/widgets/session_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

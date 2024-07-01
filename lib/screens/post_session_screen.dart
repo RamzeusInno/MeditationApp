@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:meditation_app/widgets/sessionSummaryWidget.dart';
+import 'package:meditation_app/widgets/session_summary_widget.dart';
 
 
 class PostSessionScreen extends ConsumerStatefulWidget {
