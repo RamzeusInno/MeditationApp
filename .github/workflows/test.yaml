@@ -21,7 +21,6 @@ jobs:
 
       - run: flutter test test/unit_test.dart
 
-<<<<<<< HEAD
       - run: flutter analyze --no-fatal-warnings --no-fatal-infos lib/
 
       - run: flutter build web --release lib/main.dart
