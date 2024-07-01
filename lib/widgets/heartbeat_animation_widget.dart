@@ -1,5 +1,5 @@
-import 'package:contrast_shower_appplication/providers/flag_provider.dart';
-import 'package:contrast_shower_appplication/providers/selectedSessionProvider.dart';
+import 'package:meditation_app/providers/flag_provider.dart';
+import 'package:meditation_app/providers/selectedSessionProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

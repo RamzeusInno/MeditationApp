@@ -2,8 +2,8 @@ import 'package:contrast_shower_appplication/providers/theme_provider.dart';
 import 'package:contrast_shower_appplication/widgets/default_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:contrast_shower_appplication/widgets/sessionDurationForm.dart';
-import 'package:contrast_shower_appplication/widgets/song_selection_widget.dart';
+import 'package:meditation_app/widgets/sessionDurationForm.dart';
+import 'package:meditation_app/widgets/song_selection_widget.dart';
 
 
 class SessionPreferencesScreen extends ConsumerStatefulWidget {

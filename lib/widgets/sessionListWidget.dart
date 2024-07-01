@@ -1,8 +1,8 @@
-import 'package:contrast_shower_appplication/providers/sessionProvider.dart';
-import 'package:contrast_shower_appplication/session.dart';
+import 'package:meditation_app/providers/sessionProvider.dart';
+import 'package:meditation_app/session.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:contrast_shower_appplication/providers/selectedSessionProvider.dart';
+import 'package:meditation_app/providers/selectedSessionProvider.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 
