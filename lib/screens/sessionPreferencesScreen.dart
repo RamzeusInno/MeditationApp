@@ -1,3 +1,5 @@
+import 'package:contrast_shower_appplication/providers/theme_provider.dart';
+import 'package:contrast_shower_appplication/widgets/default_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meditation_app/widgets/sessionDurationForm.dart';
@@ -15,22 +17,7 @@ class _sessionPreferencesScreenState extends ConsumerState<SessionPreferencesScr
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Session preferences",
-          style: TextStyle(
-            color: Colors.white,
-            shadows: <Shadow>[
-              Shadow(
-                offset: Offset(2.0, 2.0),
-                blurRadius: 3.0,
-                color: Colors.black,
-              ),
-            ],
-          ),
-        ),
-        backgroundColor: Colors.blue[900],
-      ),
+      appBar: DefaultAppBar(title: "Start New Meditation", ref: ref),
       body: Column(
         children: [
           Expanded(
